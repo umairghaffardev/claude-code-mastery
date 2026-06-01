@@ -1,0 +1,67 @@
+// Prisma Schema — claude-code-mastery
+// Database: Supabase PostgreSQL
+// 
+// LEARNING NOTE:
+// This schema is the single source of truth for the database.
+// After editing this file, always run:
+//   npx prisma migrate dev --name [description]
+//   npx prisma generate
+//
+// Claude Code's task-manager Skill uses this schema as its reference.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Required for Supabase connection pooling
+}
+
+// ─────────────────────────────────────────────
+// User
+// ─────────────────────────────────────────────
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String   // bcrypt hash
+  tasks     Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+// ─────────────────────────────────────────────
+// Task
+// Scaffolded by Claude Code via task-manager Skill (PROMPT.md Task 2)
+// ─────────────────────────────────────────────
+model Task {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  priority    Priority   @default(MEDIUM)
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([userId, status])
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
