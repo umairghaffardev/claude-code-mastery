@@ -6,7 +6,7 @@ description: >
   or gather information from the web before making an implementation decision.
   Triggers: "research X", "find best practices for", "what is the current
   recommendation for", "compare X vs Y", "look up how to".
-model: claude-sonnet-4-20250514
+model: claude-haiku-4-5-20251001
 tools:
   - web_search
   - web_fetch

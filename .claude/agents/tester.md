@@ -5,7 +5,7 @@ description: >
   unit tests, integration tests, or component tests written.
   Triggers: "write tests for", "add test coverage", "test this component",
   "write unit tests", "integration test for API".
-model: claude-sonnet-4-20250514
+model: claude-haiku-4-5-20251001
 ---
 
 # Tester Subagent
