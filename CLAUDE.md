@@ -73,6 +73,7 @@ Before completing any task, verify:
 ## 🤖 Claude Code Behaviour
 
 - When adding a new feature, always check if a relevant **Skill** exists in `.claude/skills/` first.
+- When writing or editing any TypeScript / TSX, use the **typescript-linting** skill so new code also resolves type and ESLint issues before the task is marked done.
 - When researching unfamiliar topics, spawn the **researcher** subagent.
 - When writing tests, use the **tester** subagent.
 - Prefer running `npm run lint --fix` after editing frontend files.
